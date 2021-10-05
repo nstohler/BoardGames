@@ -36,8 +36,6 @@ namespace Mastermind.Game
             var colorAndPositionExactCount = 0;
             var colorExactCount = 0;
 
-            var fullMatchCountMap = Enum.GetValues<PegColor>().ToDictionary(k => k, v => 0);
-
             if(MatchesOtherPattern(codeBreakerPattern))
             {
                 return new CheckResult(4, 0);
@@ -55,17 +53,12 @@ namespace Mastermind.Game
                 if (makerColor == breakerColor)
                 {
                     colorAndPositionExactCount++;
-                    fullMatchCountMap[makerColor]++;
                 }
                 else
                 {
                     makerNonfullPattern.Add(makerColor);
                     breakerNonfullPattern.Add(breakerColor);
                 }
-                //else if (PegColors.Any(x => x == breakerColor))
-                //{
-                //    colorExactCount++;
-                //}
             }
 
             for (int i = 0; i < makerNonfullPattern.Count; i++)
@@ -77,32 +70,6 @@ namespace Mastermind.Game
                     colorExactCount++;
                 }
             }
-
-            //// find color matches, use map
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    var makerColor = PegColors[i];
-            //    var breakerColor = codeBreakerPattern.PegColors[i];
-
-            //    // all matched already
-            //    if (makerColor != breakerColor)
-            //    {
-            //        //if (codeBreakerPattern.PegColors.Count(x => x == breakerColor) > fullMatchCountMap[breakerColor])
-            //        //{
-
-            //        //}
-            //        //else
-            //        if (PegColors.Any(x => x == breakerColor))
-            //        {
-            //            var count = codeBreakerPattern.PegColors.Count(x => x == breakerColor);
-            //            var exactMatchCount = fullMatchCountMap[breakerColor];
-            //            if (exactMatchCount == 0 || count < exactMatchCount)
-            //            {
-            //                colorExactCount++;
-            //            }
-            //        }
-            //    }
-            //}
 
             return new CheckResult(colorAndPositionExactCount, colorExactCount);
         }
