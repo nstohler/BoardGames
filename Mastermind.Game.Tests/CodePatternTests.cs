@@ -226,6 +226,14 @@ namespace Mastermind.Game.Tests
             PegColor.Red, PegColor.Red, PegColor.Yellow, PegColor.Yellow,
             PegColor.Yellow, PegColor.Red, PegColor.Yellow, PegColor.Yellow,
             3, 0)]
+        [DataRow(
+            PegColor.Red, PegColor.Yellow, PegColor.Orange, PegColor.Green,
+            PegColor.Red, PegColor.Red, PegColor.Red, PegColor.Red,
+            1, 0)]
+        [DataRow(
+            PegColor.Red, PegColor.Yellow, PegColor.Orange, PegColor.Red,
+            PegColor.Red, PegColor.Orange, PegColor.Yellow, PegColor.Red,
+            2, 2)]
         public void GetCheckResult_returns_correct_for_special_matches(
             PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
             PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
