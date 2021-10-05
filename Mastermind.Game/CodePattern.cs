@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mastermind.Game.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,10 +11,10 @@ namespace Mastermind.Game
     {
         private readonly PegColor[] PegColors;
 
-        public PegColor Color1 { get => PegColors[0]; }
-        public PegColor Color2 { get => PegColors[1]; }
-        public PegColor Color3 { get => PegColors[2]; }
-        public PegColor Color4 { get => PegColors[3]; }
+        public PegColor Color1 => PegColors[0];
+        public PegColor Color2 => PegColors[1];
+        public PegColor Color3 => PegColors[2];
+        public PegColor Color4 => PegColors[3];
 
         public CodePattern(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
         {

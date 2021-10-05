@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game", "Mastermind.Game\Mastermind.Game.csproj", "{958077EE-92DE-4791-B4BD-FD61657F0365}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastermind.Game", "Mastermind.Game\Mastermind.Game.csproj", "{958077EE-92DE-4791-B4BD-FD61657F0365}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.Tests", "Mastermind.Game.Tests\Mastermind.Game.Tests.csproj", "{A6349A72-8DFC-42A1-8206-6E75048F0D0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastermind.Game.Tests", "Mastermind.Game.Tests\Mastermind.Game.Tests.csproj", "{A6349A72-8DFC-42A1-8206-6E75048F0D0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.Interfaces", "Mastermind.Game.Interfaces\Mastermind.Game.Interfaces.csproj", "{ED1C2627-AA75-47A0-BF63-069443111218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.Models", "Mastermind.Game.Models\Mastermind.Game.Models.csproj", "{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{A6349A72-8DFC-42A1-8206-6E75048F0D0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6349A72-8DFC-42A1-8206-6E75048F0D0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6349A72-8DFC-42A1-8206-6E75048F0D0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED1C2627-AA75-47A0-BF63-069443111218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED1C2627-AA75-47A0-BF63-069443111218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED1C2627-AA75-47A0-BF63-069443111218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED1C2627-AA75-47A0-BF63-069443111218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

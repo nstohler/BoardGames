@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Mastermind.Game.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,7 @@ namespace Mastermind.Game.Tests
         }
 
         [TestMethod]
-        public void MatchesOtherPattern_returns_false_for_same_patterns()
+        public void MatchesOtherPattern_returns_false_for_different_patterns()
         {
             // Arrange
             var color1 = PegColor.Yellow;
@@ -90,6 +91,14 @@ namespace Mastermind.Game.Tests
             PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.Yellow,
             PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.Yellow,
             4, 0)]
+        [DataRow(
+            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
+            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
+            4, 0)]
+        [DataRow(
+            PegColor.Orange, PegColor.Green, PegColor.LightBlue, PegColor.DarkBlue,
+            PegColor.Orange, PegColor.Green, PegColor.LightBlue, PegColor.DarkBlue,
+            4, 0)]
         public void GetCheckResult_returns_correct_result_when_everything_matches(
             PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
             PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
@@ -100,6 +109,7 @@ namespace Mastermind.Game.Tests
                 makerColor1, makerColor2, makerColor3, makerColor4,
                 breakerColor1, breakerColor2, breakerColor3, breakerColor4,
                 expectedColorAndPositionExactCount, expectedColorExactCount);
+
         }
 
         [TestMethod]
@@ -266,6 +276,9 @@ namespace Mastermind.Game.Tests
             // Assert
             checkResult.ColorAndPositionExactCount.Should().Be(expectedColorAndPositionExactCount);
             checkResult.ColorExactCount.Should().Be(expectedColorExactCount);
+
+            var isGameWon = expectedColorAndPositionExactCount == 4 && expectedColorExactCount == 0;
+            checkResult.IsGameWon.Should().Be(isGameWon);
         }
     }
 }

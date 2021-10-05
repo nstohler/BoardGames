@@ -4,8 +4,4 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Mastermind.Game.Interfaces\Mastermind.Game.Interfaces.csproj" />
-  </ItemGroup>
-
 </Project>
