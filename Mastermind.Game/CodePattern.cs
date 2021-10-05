@@ -43,6 +43,10 @@ namespace Mastermind.Game
                 return new CheckResult(4, 0);
             }
 
+            // build arrays without exact matches for rest
+            var makerNonfullPattern = new List<PegColor>();
+            var breakerNonfullPattern = new List<PegColor>();
+
             // find full matches, update map
             for (int i = 0; i < 4; i++)
             {
@@ -53,7 +57,22 @@ namespace Mastermind.Game
                     colorAndPositionExactCount++;
                     fullMatchCountMap[makerColor]++;
                 }
-                else if (PegColors.Any(x => x == breakerColor))
+                else
+                {
+                    makerNonfullPattern.Add(makerColor);
+                    breakerNonfullPattern.Add(breakerColor);
+                }
+                //else if (PegColors.Any(x => x == breakerColor))
+                //{
+                //    colorExactCount++;
+                //}
+            }
+
+            for (int i = 0; i < makerNonfullPattern.Count; i++)
+            {
+                var makerColor = makerNonfullPattern[i];
+                var breakerColor = breakerNonfullPattern[i];
+                if (breakerNonfullPattern.Any(x => x == makerColor))
                 {
                     colorExactCount++;
                 }
@@ -68,14 +87,19 @@ namespace Mastermind.Game
             //    // all matched already
             //    if (makerColor != breakerColor)
             //    {
-            //        if (codeBreakerPattern.PegColors.Count(x => x == breakerColor) > fullMatchCountMap[breakerColor])
-            //        {
+            //        //if (codeBreakerPattern.PegColors.Count(x => x == breakerColor) > fullMatchCountMap[breakerColor])
+            //        //{
 
-            //        }
-            //        else
-            //      if (PegColors.Any(x => x == breakerColor))
+            //        //}
+            //        //else
+            //        if (PegColors.Any(x => x == breakerColor))
             //        {
-            //            colorExactCount++;
+            //            var count = codeBreakerPattern.PegColors.Count(x => x == breakerColor);
+            //            var exactMatchCount = fullMatchCountMap[breakerColor];
+            //            if (exactMatchCount == 0 || count < exactMatchCount)
+            //            {
+            //                colorExactCount++;
+            //            }
             //        }
             //    }
             //}
