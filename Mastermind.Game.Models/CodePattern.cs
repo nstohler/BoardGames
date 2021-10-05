@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mastermind.Game
+namespace Mastermind.Game.Models
 {
     public class CodePattern
     {
