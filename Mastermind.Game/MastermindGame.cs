@@ -11,13 +11,13 @@ namespace Mastermind.Game
     public class MastermindGame : IMastermindGame
     {
         private readonly CodePattern _codeMakerCombination;
-        private readonly List<CodePattern> _codeBreakerCombinations;
+        private readonly List<CodePatternWithResult> _codeBreakerCombinationsWithResults;
 
-        public int GetCodeBreakerCombinationCount => _codeBreakerCombinations.Count;
+        public int GetCodeBreakerCombinationCount => _codeBreakerCombinationsWithResults.Count;
 
         public MastermindGame(IRandomPegColorService randomPegColorService)
         {
-            _codeBreakerCombinations = new List<CodePattern>();
+            _codeBreakerCombinationsWithResults = new List<CodePatternWithResult>();
             _codeMakerCombination = new CodePattern(
                 randomPegColorService.GetRandomPegColor(),
                 randomPegColorService.GetRandomPegColor(),
@@ -25,15 +25,17 @@ namespace Mastermind.Game
                 randomPegColorService.GetRandomPegColor());
         }
 
-        public Task<CheckResult> SubmitAndCheckCodeBreakerCodePatternAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
+        public Task<CodePatternWithResult> SubmitAndCheckCodeBreakerCodePatternAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
         {
             var playerCodePattern = new CodePattern(color1, color2, color3, color4);
+            var result = _codeMakerCombination.GetCheckResult(playerCodePattern);
+            var codePatternWithResult = new CodePatternWithResult(playerCodePattern, result);
 
             // submit player code pattern, store in list
-            _codeBreakerCombinations.Add(playerCodePattern);
+            _codeBreakerCombinationsWithResults.Add(codePatternWithResult);
 
             // check result
-            return Task.FromResult(_codeMakerCombination.GetCheckResult(playerCodePattern));
+            return Task.FromResult(codePatternWithResult);
         }
 
         public Task<bool> IsExactMatchAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4)

@@ -171,13 +171,13 @@ namespace Mastermind.Game.Tests
             var sut = new MastermindGame(randomPegColorMoq.Object);
 
             // Act
-            var checkResult = await sut.SubmitAndCheckCodeBreakerCodePatternAsync(breakerColor1, breakerColor2, breakerColor3, breakerColor4);
+            var codePatternWithResult = await sut.SubmitAndCheckCodeBreakerCodePatternAsync(breakerColor1, breakerColor2, breakerColor3, breakerColor4);
 
             // Assert
-            checkResult.ColorAndPositionExactCount.Should().Be(expectedColorAndPositionExactCount);
-            checkResult.ColorExactCount.Should().Be(expectedColorExactCount);
+            codePatternWithResult.Result.ColorAndPositionExactCount.Should().Be(expectedColorAndPositionExactCount);
+            codePatternWithResult.Result.ColorExactCount.Should().Be(expectedColorExactCount);
             var isMatch = await sut.IsExactMatchAsync(breakerColor1, breakerColor2, breakerColor3, breakerColor4);
-            checkResult.IsGameWon.Should().Be(isMatch);
+            codePatternWithResult.Result.IsGameWon.Should().Be(isMatch);
         }
 
         [TestMethod]
