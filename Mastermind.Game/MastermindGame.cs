@@ -10,25 +10,31 @@ namespace Mastermind.Game
 {
     public class MastermindGame : IMastermindGame
     {
+        private readonly IRandomPegColorService _randomPegColorService;
+        private readonly ICodePatternCheckService _codePatternCheckService;
+
         private readonly CodePattern _codeMakerCombination;
         private readonly List<CodePatternWithResult> _codeBreakerCombinationsWithResults;
 
         public int GetCodeBreakerCombinationCount => _codeBreakerCombinationsWithResults.Count;
 
-        public MastermindGame(IRandomPegColorService randomPegColorService)
+        public MastermindGame(IRandomPegColorService randomPegColorService, ICodePatternCheckService codePatternCheckService)
         {
+            _randomPegColorService = randomPegColorService;
+            _codePatternCheckService = codePatternCheckService;
+
             _codeBreakerCombinationsWithResults = new List<CodePatternWithResult>();
             _codeMakerCombination = new CodePattern(
-                randomPegColorService.GetRandomPegColor(),
-                randomPegColorService.GetRandomPegColor(),
-                randomPegColorService.GetRandomPegColor(),
-                randomPegColorService.GetRandomPegColor());
+                _randomPegColorService.GetRandomPegColor(),
+                _randomPegColorService.GetRandomPegColor(),
+                _randomPegColorService.GetRandomPegColor(),
+                _randomPegColorService.GetRandomPegColor());
         }
 
         public Task<CodePatternWithResult> SubmitAndCheckCodeBreakerCodePatternAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
         {
             var playerCodePattern = new CodePattern(color1, color2, color3, color4);
-            var result = _codeMakerCombination.GetCheckResult(playerCodePattern);
+            var result = _codePatternCheckService.GetCheckResult(_codeMakerCombination, playerCodePattern);
             var codePatternWithResult = new CodePatternWithResult(playerCodePattern, result);
 
             // submit player code pattern, store in list
@@ -40,7 +46,7 @@ namespace Mastermind.Game
 
         public Task<bool> IsExactMatchAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
         {
-            return Task.FromResult(_codeMakerCombination.MatchesOtherPattern(new CodePattern(color1, color2, color3, color4)));
+            return Task.FromResult(_codePatternCheckService.AreMatchingCodePatterns(_codeMakerCombination, new CodePattern(color1, color2, color3, color4)));
         }
 
         public void StartNewGame()

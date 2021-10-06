@@ -23,7 +23,7 @@ namespace Mastermind.Game.ConsoleApp
             };
             var validColorCodeChars = charToPegColorMap.Keys.ToHashSet();
 
-            IMastermindGame mastermindGame = new MastermindGame(new RandomPegColorService());
+            IMastermindGame mastermindGame = new MastermindGame(new RandomPegColorService(), new CodePatternCheckService());
 
             // main game loop here
             Console.WriteLine("The CodeMaker made his choice.");
@@ -110,7 +110,7 @@ namespace Mastermind.Game.ConsoleApp
 
                 for (int i = 0; i < 4; i++)
                 {
-                    Console.BackgroundColor = GetConsoleColor(codeMakerPattern.ReadPegColorsCopy[i]);
+                    Console.BackgroundColor = GetConsoleColor(codeMakerPattern.PegColors[i]);
                     Console.Write($"  X  ");
 
                     Console.ResetColor();

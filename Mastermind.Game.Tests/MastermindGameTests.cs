@@ -31,7 +31,7 @@ namespace Mastermind.Game.Tests
                 .Returns(color4);
 
             // Act
-            var sut = new MastermindGame(randomPegColorMoq.Object);
+            var sut = new MastermindGame(randomPegColorMoq.Object, new CodePatternCheckService());
 
             // Assert
             randomPegColorMoq.Verify(x => x.GetRandomPegColor(), Times.Exactly(4));
@@ -168,7 +168,7 @@ namespace Mastermind.Game.Tests
                 .Returns(makerColor2)
                 .Returns(makerColor3)
                 .Returns(makerColor4);
-            var sut = new MastermindGame(randomPegColorMoq.Object);
+            var sut = new MastermindGame(randomPegColorMoq.Object, new CodePatternCheckService());
 
             // Act
             var codePatternWithResult = await sut.SubmitAndCheckCodeBreakerCodePatternAsync(breakerColor1, breakerColor2, breakerColor3, breakerColor4);
@@ -201,7 +201,7 @@ namespace Mastermind.Game.Tests
                 .Returns(color2)
                 .Returns(color3)
                 .Returns(color4);
-            var sut = new MastermindGame(randomPegColorMoq.Object);
+            var sut = new MastermindGame(randomPegColorMoq.Object, new CodePatternCheckService());
 
             // Act
             for (int i = 0; i < expectedFinalCount; i++)
