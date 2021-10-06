@@ -13,10 +13,10 @@ namespace Mastermind.Game
         private readonly Random _random = new Random();
         private readonly List<PegColor> _pegColors = Enum.GetValues<PegColor>().ToList();
 
+        // TODO: zufällige farbe zurückgeben
         public PegColor GetRandomPegColor()
         {
-            var index = _random.Next(0, _pegColors.Count());
-            return _pegColors[index];
+            throw new NotImplementedException();
         }
     }
 }

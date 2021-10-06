@@ -31,33 +31,33 @@ namespace Mastermind.Game
                 _randomPegColorService.GetRandomPegColor());
         }
 
+        // TODO:
+        // - CodeBreaker-Pattern mit CodeMaker-Pattern vergleichen,
+        // - Resultat und CodeMaker-Pattern an _codeBreakerCombinationsWithResults anhängen
+        // - Resultat zurückgeben.
         public Task<CodePatternWithResult> SubmitAndCheckCodeBreakerCodePatternAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
         {
-            var playerCodePattern = new CodePattern(color1, color2, color3, color4);
-            var result = _codePatternCheckService.GetCheckResult(_codeMakerCombination, playerCodePattern);
-            var codePatternWithResult = new CodePatternWithResult(playerCodePattern, result);
-
-            // submit player code pattern, store in list
-            _codeBreakerCombinationsWithResults.Add(codePatternWithResult);
-
-            // check result
-            return Task.FromResult(codePatternWithResult);
+            throw new NotImplementedException();
         }
 
+        // TODO:
+        // - true/false zurückgeben, wenn Patterns 100% matchen (oder nicht)
         public Task<bool> IsExactMatchAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
         {
             return Task.FromResult(_codePatternCheckService.AreMatchingCodePatterns(_codeMakerCombination, new CodePattern(color1, color2, color3, color4)));
         }
 
+        // TODO: wird nicht gebraucht, entfernen
         public void StartNewGame()
         {
             throw new NotImplementedException();
         }
 
+        // TODO: CodeMaker-Pattern zurückgeben, so dass bei Verlust der versteckte Code dargestellt werden kann.
         public CodePattern GetCodeMakerPattern()
         {
             // only use after losing the game!
-            return _codeMakerCombination;
+            throw new NotImplementedException();
         }
     }
 }
