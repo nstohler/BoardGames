@@ -70,6 +70,10 @@ namespace Mastermind.Game.Tests
             PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.Yellow,
             PegColor.Orange, PegColor.Orange, PegColor.Orange, PegColor.Orange,
             0, 0)]
+        [DataRow(
+            PegColor.Yellow, PegColor.Orange, PegColor.DarkBlue, PegColor.Green,
+            PegColor.Red, PegColor.LightBlue, PegColor.Red, PegColor.LightBlue,
+            0, 0)]
         public void GetCheckResult_returns_correct_result_when_nothing_matches(
             PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
             PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,

@@ -8,8 +8,8 @@ namespace Mastermind.Game.Interfaces
     {
         void StartNewGame();
 
-        Task<CheckResult> CheckCodeBreakerCodePattern(PegColor color1, PegColor color2, PegColor color3, PegColor color4);
+        Task<CheckResult> SubmitAndCheckCodeBreakerCodePatternAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4);
 
-        Task<bool> IsExactMatch(PegColor color1, PegColor color2, PegColor color3, PegColor color4);
+        Task<bool> IsExactMatchAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4);
     }
 }
