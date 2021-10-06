@@ -16,6 +16,8 @@ namespace Mastermind.Game.Models
         public PegColor Color3 => PegColors[2];
         public PegColor Color4 => PegColors[3];
 
+        public PegColor[] ReadPegColorsCopy => PegColors.ToArray();
+
         public CodePattern(PegColor color1, PegColor color2, PegColor color3, PegColor color4)
         {
             PegColors = new PegColor[]

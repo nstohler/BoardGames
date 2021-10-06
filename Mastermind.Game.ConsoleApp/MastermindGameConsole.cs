@@ -42,7 +42,7 @@ namespace Mastermind.Game.ConsoleApp
             var isGameWon = false;
             var maxTries = 10;
             var currentTry = 1;
-            while (currentTry < maxTries)
+            while (currentTry <= maxTries)
             {
                 var isValidCode = false;
                 string playerCodeString = string.Empty;
@@ -104,6 +104,19 @@ namespace Mastermind.Game.ConsoleApp
             else
             {
                 Console.WriteLine("You loose.");
+
+                // show codeMaker code
+                var codeMakerPattern = mastermindGame.GetCodeMakerPattern();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    Console.BackgroundColor = GetConsoleColor(codeMakerPattern.ReadPegColorsCopy[i]);
+                    Console.Write($"  X  ");
+
+                    Console.ResetColor();
+                }
+                Console.WriteLine();
+
             }
         }
 

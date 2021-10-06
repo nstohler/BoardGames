@@ -11,5 +11,7 @@ namespace Mastermind.Game.Interfaces
         Task<CodePatternWithResult> SubmitAndCheckCodeBreakerCodePatternAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4);
 
         Task<bool> IsExactMatchAsync(PegColor color1, PegColor color2, PegColor color3, PegColor color4);
+
+        CodePattern GetCodeMakerPattern();
     }
 }

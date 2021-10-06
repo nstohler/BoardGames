@@ -47,5 +47,11 @@ namespace Mastermind.Game
         {
             throw new NotImplementedException();
         }
+
+        public CodePattern GetCodeMakerPattern()
+        {
+            // only use after losing the game!
+            return _codeMakerCombination;
+        }
     }
 }
