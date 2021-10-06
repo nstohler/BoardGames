@@ -22,7 +22,6 @@ namespace Mastermind.Game.ConsoleApp
                 { 'B', PegColor.DarkBlue },
             };
             var validColorCodeChars = charToPegColorMap.Keys.ToHashSet();
-            //var validColorCodeChars = new char[] { 'Y', 'O', 'G', 'R', 'L', 'B' };
 
             IMastermindGame mastermindGame = new MastermindGame(new RandomPegColorService());
 
@@ -45,8 +44,6 @@ namespace Mastermind.Game.ConsoleApp
             var currentTry = 1;
             while (currentTry < maxTries)
             {
-                // Console.WriteLine("Color codes: Y: Yellow, O: Orange, G: Green, R: Red, L: LightBlue, B: DarkBlue");
-
                 var isValidCode = false;
                 string playerCodeString = string.Empty;
                 while (!isValidCode)

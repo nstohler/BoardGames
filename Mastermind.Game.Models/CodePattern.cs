@@ -62,13 +62,23 @@ namespace Mastermind.Game.Models
                 }
             }
 
+            var breakerReductionPattern = breakerNonfullPattern.ToList();
             for (int i = 0; i < makerNonfullPattern.Count; i++)
             {
                 var makerColor = makerNonfullPattern[i];
                 var breakerColor = breakerNonfullPattern[i];
-                if (breakerNonfullPattern.Any(x => x == makerColor))
+                if (breakerReductionPattern.Any(x => x == makerColor))
                 {
                     colorExactCount++;
+
+                    // Remove found entry from reduction list.
+                    // This is required to create valid results when the same color is multiple times in the maker code
+                    // Example: BOYB vs. YBOO => must return 0, 3 (and not 0, 4)!
+                    var index = breakerReductionPattern.FindLastIndex(x => x == makerColor);
+                    if (index > -1)
+                    {
+                        breakerReductionPattern.RemoveAt(index);
+                    }
                 }
             }
 

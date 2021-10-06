@@ -221,6 +221,22 @@ namespace Mastermind.Game.Tests
 
         [TestMethod]
         [DataRow(
+            PegColor.DarkBlue, PegColor.Orange, PegColor.Yellow, PegColor.DarkBlue,
+            PegColor.Yellow, PegColor.DarkBlue, PegColor.Orange, PegColor.Orange,
+            0, 3)]
+        [DataRow(
+            PegColor.DarkBlue, PegColor.Orange, PegColor.Yellow, PegColor.DarkBlue,
+            PegColor.Orange, PegColor.DarkBlue, PegColor.Orange, PegColor.Orange,
+            0, 2)]
+        [DataRow(
+            PegColor.DarkBlue, PegColor.DarkBlue, PegColor.Yellow, PegColor.DarkBlue,
+            PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.DarkBlue,
+            2, 0)]
+        [DataRow(
+            PegColor.DarkBlue, PegColor.DarkBlue, PegColor.Yellow, PegColor.DarkBlue,
+            PegColor.DarkBlue, PegColor.Yellow, PegColor.DarkBlue, PegColor.DarkBlue,
+            2, 2)]
+        [DataRow(
             PegColor.Red, PegColor.Red, PegColor.Yellow, PegColor.Red,
             PegColor.Red, PegColor.Red, PegColor.Red, PegColor.Yellow,
             2, 2)]
