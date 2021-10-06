@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mastermind.Game.Interfaces\Mastermind.Game.Interfaces.csproj" />
+    <ProjectReference Include="..\Mastermind.Game\Mastermind.Game.csproj" />
+  </ItemGroup>
+
+</Project>

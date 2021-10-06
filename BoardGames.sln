@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.Interfaces"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.Models", "Mastermind.Game.Models\Mastermind.Game.Models.csproj", "{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mastermind", "Mastermind", "{365AFD1F-5144-4158-B280-21CEF49D80CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.ConsoleApp", "Mastermind.Game.ConsoleApp\Mastermind.Game.ConsoleApp.csproj", "{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,20 @@ Global
 		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{958077EE-92DE-4791-B4BD-FD61657F0365} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
+		{A6349A72-8DFC-42A1-8206-6E75048F0D0E} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
+		{ED1C2627-AA75-47A0-BF63-069443111218} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
+		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
+		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB94E388-F698-4317-BEC0-5361B9D85914}
