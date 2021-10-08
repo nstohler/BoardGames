@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Mastermind.Game.Interfaces;
+using Mastermind.Game.WpfApp.ViewModels;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,13 @@ namespace Mastermind.Game.WpfApp
         public MainWindow()
         {
             InitializeComponent();
+
+            StartNewGame();
+        }
+
+        private void StartNewGame()
+        {
+            DataContext = App.Current.Services.GetService<MastermindGameViewModel>();
         }
     }
 }

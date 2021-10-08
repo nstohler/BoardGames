@@ -11,4 +11,9 @@
     <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mastermind.Game.Interfaces\Mastermind.Game.Interfaces.csproj" />
+    <ProjectReference Include="..\Mastermind.Game\Mastermind.Game.csproj" />
+  </ItemGroup>
+
 </Project>
