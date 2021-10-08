@@ -26,7 +26,12 @@
             <Label Content="Player area" />
             <StackPanel Orientation="Horizontal">
                 <Label Content="Colors" />
-                
+                <Button Width="70" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Yellow" Background="{Binding CommandParameter, RelativeSource={RelativeSource Self}}" />
+                <Button Width="70" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="Orange" Background="{Binding CommandParameter, RelativeSource={RelativeSource Self}}" />
+                <Button Width="70" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="Red" Background="{Binding CommandParameter, RelativeSource={RelativeSource Self}}" />
+                <Button Width="70" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="Green" Background="{Binding CommandParameter, RelativeSource={RelativeSource Self}}" />
+                <Button Width="70" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="LightBlue" Background="{Binding CommandParameter, RelativeSource={RelativeSource Self}}" />
+                <Button Width="70" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="DarkBlue" Foreground="White" Background="{Binding CommandParameter, RelativeSource={RelativeSource Self}}" />
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
