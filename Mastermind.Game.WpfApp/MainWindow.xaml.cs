@@ -27,11 +27,6 @@ namespace Mastermind.Game.WpfApp
         {
             InitializeComponent();
 
-            StartNewGame();
-        }
-
-        private void StartNewGame()
-        {
             DataContext = App.Current.Services.GetService<MastermindGameViewModel>();
         }
     }

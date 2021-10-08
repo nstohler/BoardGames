@@ -15,6 +15,7 @@ namespace Mastermind.Game
 
         private readonly CodePattern _codeMakerCombination;
         private readonly List<CodePatternWithResult> _codeBreakerCombinationsWithResults;
+        private readonly Guid _gameId = Guid.NewGuid();
 
         public int GetCodeBreakerCombinationCount => _codeBreakerCombinationsWithResults.Count;
 
@@ -58,6 +59,11 @@ namespace Mastermind.Game
         {
             // only use after losing the game!
             return _codeMakerCombination;
+        }
+
+        public string GetGameId()
+        {
+            return _gameId.ToString();
         }
     }
 }

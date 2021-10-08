@@ -48,7 +48,7 @@ namespace Mastermind.Game.WpfApp
             services.AddTransient<IMastermindGame, MastermindGame>();
 
             // ViewModels
-            services.AddTransient<MastermindGameViewModel>();
+            services.AddSingleton<MastermindGameViewModel>();
 
             return services.BuildServiceProvider();
         }

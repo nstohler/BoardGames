@@ -20,6 +20,7 @@
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Label Content="Buttons here (New game/Get hint/...)" />
+            <Button Content="Start a new game" Command="{Binding StartNewGameCommand}" />
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">
             <Label Content="Player area" />
@@ -27,6 +28,9 @@
                 <Label Content="Colors" />
                 
             </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="{Binding GameId}" d:Content="GameId here" />
         </StackPanel>
     </Grid>
 </Window>
