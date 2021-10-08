@@ -1,0 +1,54 @@
+﻿<Window x:Class="WpfDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDemo" 
+        xmlns:viewmodels="clr-namespace:WpfDemo.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewmodels:PersonViewModel, IsDesignTimeCreatable=True}"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel Orientation="Vertical">
+        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" />
+        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120"/>
+        <Separator />
+        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" />
+        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120"/>
+        <Separator />
+        <Label Content="{Binding LikeCount}" HorizontalAlignment="Center" />
+        <Button Content="Add a ♥" Command="{Binding IncrementLikeCounterCommand}" />
+        <ListView ItemsSource="{Binding ColorPatterns}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Color 1" Width="120" DisplayMemberBinding="{Binding Color1, Mode=OneWay}" />
+                    <GridViewColumn Header="Color 2" Width="50" DisplayMemberBinding="{Binding Color2, Mode=OneWay}" />
+                    <GridViewColumn Header="Color 3" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Background="{Binding Color3, Mode=OneWay}" Margin="-6,-3,-6,-2" Height="22" >
+                                    <TextBlock Text="{Binding Color3, Mode=OneWay}" Margin="6,3,6,2" HorizontalAlignment="Stretch" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Add a line" Command="{Binding AddLineCommand}" />
+        <Separator />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Black" Command="{Binding AddColorCommand}" CommandParameter="Black" />
+            <Button Content="Blue" Command="{Binding AddColorCommand}" CommandParameter="Blue" />
+            <Button Content="Green" Command="{Binding AddColorCommand}" CommandParameter="Green" />
+            <Button Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Yellow" />
+            <Button Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="Orange" />
+            <Button Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="LightBlue" />
+        </StackPanel>
+        <Label Content="{Binding UserCodePattern}" />
+    </StackPanel>
+</Window>
