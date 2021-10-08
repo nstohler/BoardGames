@@ -19,6 +19,8 @@ namespace Mastermind.Game.WpfApp.ViewModels
         {
             StartNewGameCommand = new RelayCommand(StartNewGame);
             AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => this.PlayerCode.Length < 4);
+            BackspaceCommand = new RelayCommand(ClearLastColor, () => this.PlayerCode.Length > 0);
+            SubmitCodeCommand = new RelayCommand(SubmitCode, () => this.PlayerCode.Length == 4);
 
             StartNewGame();
         }
@@ -32,6 +34,11 @@ namespace Mastermind.Game.WpfApp.ViewModels
             GameId = _mastermindGame.GetGameId();
             PlayerCode = string.Empty;
         }
+
+        public RelayCommand StartNewGameCommand { get; }
+        public AsyncRelayCommand<string> AddColorCommand { get; set; }
+        public RelayCommand BackspaceCommand { get; }
+        public RelayCommand SubmitCodeCommand { get; }
 
         private string _gameId;
 
@@ -50,17 +57,25 @@ namespace Mastermind.Game.WpfApp.ViewModels
             {
                 SetProperty(ref _playerCode, value);
                 AddColorCommand.NotifyCanExecuteChanged();
+                BackspaceCommand.NotifyCanExecuteChanged();
             }
         }
-
-        public ICommand StartNewGameCommand { get; }
-
-        public AsyncRelayCommand<string> AddColorCommand { get; set; }
 
         private Task AddColor(string colorCode)
         {
             PlayerCode += colorCode;
             return Task.CompletedTask;
+        }
+
+        private void ClearLastColor()
+        {
+            PlayerCode = PlayerCode.Remove(PlayerCode.Length - 1);
+            // PlayerCode += "x";
+        }
+
+        private void SubmitCode()
+        {
+
         }
     }
 }
