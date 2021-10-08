@@ -7,13 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastermind.Game", "Mastermi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastermind.Game.Tests", "Mastermind.Game.Tests\Mastermind.Game.Tests.csproj", "{A6349A72-8DFC-42A1-8206-6E75048F0D0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.Interfaces", "Mastermind.Game.Interfaces\Mastermind.Game.Interfaces.csproj", "{ED1C2627-AA75-47A0-BF63-069443111218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastermind.Game.Interfaces", "Mastermind.Game.Interfaces\Mastermind.Game.Interfaces.csproj", "{ED1C2627-AA75-47A0-BF63-069443111218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.Models", "Mastermind.Game.Models\Mastermind.Game.Models.csproj", "{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastermind.Game.Models", "Mastermind.Game.Models\Mastermind.Game.Models.csproj", "{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mastermind", "Mastermind", "{365AFD1F-5144-4158-B280-21CEF49D80CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mastermind.Game.ConsoleApp", "Mastermind.Game.ConsoleApp\Mastermind.Game.ConsoleApp.csproj", "{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mastermind.Game.ConsoleApp", "Mastermind.Game.ConsoleApp\Mastermind.Game.ConsoleApp.csproj", "{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{A610C048-79CC-43BA-A18F-11E00BEB90CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDemo", "WpfDemo\WpfDemo.csproj", "{942A23E2-DE0E-4994-810F-3081724A0A45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{942A23E2-DE0E-4994-810F-3081724A0A45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{942A23E2-DE0E-4994-810F-3081724A0A45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{942A23E2-DE0E-4994-810F-3081724A0A45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{942A23E2-DE0E-4994-810F-3081724A0A45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +59,7 @@ Global
 		{ED1C2627-AA75-47A0-BF63-069443111218} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
 		{0BF0BEFF-5D43-4A4B-A254-477C4B3636BC} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
 		{4139EFB9-A545-4BEA-A5A1-AACA650B94B3} = {365AFD1F-5144-4158-B280-21CEF49D80CF}
+		{942A23E2-DE0E-4994-810F-3081724A0A45} = {A610C048-79CC-43BA-A18F-11E00BEB90CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BB94E388-F698-4317-BEC0-5361B9D85914}
