@@ -35,7 +35,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="PlayerCode:" />
-                <TextBox Text="{Binding PlayerCode}" IsReadOnly="true" Width="90"/>
+                <TextBox Text="{Binding PlayerCode}" d:Text="YOGR" IsReadOnly="true" Width="90" Padding="4"/>
                 <Button Content="⌫" Command="{Binding BackspaceCommand}" Padding="10,0"/>
                 <Button Content="Submit code!" Command="{Binding SubmitCodeCommand}" Padding="10,0"/>
             </StackPanel>

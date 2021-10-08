@@ -70,12 +70,11 @@ namespace Mastermind.Game.WpfApp.ViewModels
         private void ClearLastColor()
         {
             PlayerCode = PlayerCode.Remove(PlayerCode.Length - 1);
-            // PlayerCode += "x";
         }
 
         private void SubmitCode()
         {
-
+            // TODO: submit code to game to have it added to the list and checked
         }
     }
 }
