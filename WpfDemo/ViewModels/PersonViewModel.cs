@@ -15,6 +15,8 @@ namespace WpfDemo.ViewModels
         public PersonViewModel()
         {
             IncrementLikeCounterCommand = new RelayCommand(IncrementLikeCounter);
+            AddLineCommand = new RelayCommand(AddLine);
+
             // demo data
             FirstName = "Hans";
             LastName = "Wurst";
@@ -65,5 +67,28 @@ namespace WpfDemo.ViewModels
         public ICommand IncrementLikeCounterCommand { get; }
 
         private void IncrementLikeCounter() => LikeCount++;
+
+        public ICommand AddLineCommand { get; }
+
+        private void AddLine()
+        {
+            ColorPatterns.Add(new ColorPatternViewModel() { Color1 = "Yellow", Color2 = "Orange", Color3 = "Yellow", Color4 = "Yellow" });
+        }
+
+        public AsyncRelayCommand<string> AddColorCommand => new AsyncRelayCommand<string>(AddColor);
+
+        private async Task AddColor(string color)
+        {
+            await Task.Delay(0);
+            UserCodePattern += $" {color} |";
+        }
+
+        private string _userCodePattern;
+
+        public string UserCodePattern
+        {
+            get => _userCodePattern;
+            set => SetProperty(ref _userCodePattern, value);
+        }
     }
 }

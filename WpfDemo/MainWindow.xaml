@@ -39,5 +39,16 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="Add a line" Command="{Binding AddLineCommand}" />
+        <Separator />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Black" Command="{Binding AddColorCommand}" CommandParameter="Black" />
+            <Button Content="Blue" Command="{Binding AddColorCommand}" CommandParameter="Blue" />
+            <Button Content="Green" Command="{Binding AddColorCommand}" CommandParameter="Green" />
+            <Button Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Yellow" />
+            <Button Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="Orange" />
+            <Button Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="LightBlue" />
+        </StackPanel>
+        <Label Content="{Binding UserCodePattern}" />
     </StackPanel>
 </Window>
