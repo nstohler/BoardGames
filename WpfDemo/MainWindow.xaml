@@ -14,5 +14,30 @@
         <Separator />
         <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120" />
         <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" Width="120"/>
+        <Separator />
+        <Label Content="{Binding LikeCount}" HorizontalAlignment="Center" />
+        <Button Content="Add a ♥" Command="{Binding IncrementLikeCounterCommand}" />
+        <ListView ItemsSource="{Binding ColorPatterns}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Color 1" Width="120" DisplayMemberBinding="{Binding Color1, Mode=OneWay}" />
+                    <GridViewColumn Header="Color 2" Width="50" DisplayMemberBinding="{Binding Color2, Mode=OneWay}" />
+                    <GridViewColumn Header="Color 3" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Background="{Binding Color3, Mode=OneWay}" Margin="-6,-3,-6,-2" Height="22" >
+                                    <TextBlock Text="{Binding Color3, Mode=OneWay}" Margin="6,3,6,2" HorizontalAlignment="Stretch" />
+                                </Grid>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </StackPanel>
 </Window>
