@@ -18,6 +18,7 @@ namespace Mastermind.Game.WpfApp.ViewModels
         public MastermindGameViewModel()
         {
             StartNewGameCommand = new RelayCommand(StartNewGame);
+            AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => this.PlayerCode.Length < 4);
 
             StartNewGame();
         }
@@ -25,9 +26,11 @@ namespace Mastermind.Game.WpfApp.ViewModels
         private void StartNewGame()
         {
             _mastermindGame = App.Current.Services.GetService<IMastermindGame>();
+            
 
             // guid check if this works
             GameId = _mastermindGame.GetGameId();
+            PlayerCode = string.Empty;
         }
 
         private string _gameId;
@@ -38,6 +41,26 @@ namespace Mastermind.Game.WpfApp.ViewModels
             set => SetProperty(ref _gameId, value);
         }
 
+        private string _playerCode;
+
+        public string PlayerCode
+        {
+            get => _playerCode;
+            set
+            {
+                SetProperty(ref _playerCode, value);
+                AddColorCommand.NotifyCanExecuteChanged();
+            }
+        }
+
         public ICommand StartNewGameCommand { get; }
+
+        public AsyncRelayCommand<string> AddColorCommand { get; set; }
+
+        private Task AddColor(string colorCode)
+        {
+            PlayerCode += colorCode;
+            return Task.CompletedTask;
+        }
     }
 }
