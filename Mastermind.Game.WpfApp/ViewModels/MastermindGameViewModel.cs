@@ -10,6 +10,7 @@ using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
 using Mastermind.Game.WpfApp.Helpers;
 using Mastermind.Game.Models;
+using System.Collections.ObjectModel;
 
 namespace Mastermind.Game.WpfApp.ViewModels
 {
@@ -38,6 +39,7 @@ namespace Mastermind.Game.WpfApp.ViewModels
             // guid check if this works
             GameId = _mastermindGame.GetGameId();
             PlayerCode = string.Empty;
+            PlayerCodeX = new ObservableCollection<ColorViewModel>();
         }
 
         public RelayCommand StartNewGameCommand { get; }
@@ -67,20 +69,43 @@ namespace Mastermind.Game.WpfApp.ViewModels
             }
         }
 
+        private ObservableCollection<ColorViewModel> _playerCodeX;
+
+        public ObservableCollection<ColorViewModel> PlayerCodeX
+        {
+            get => _playerCodeX;
+            set => SetProperty(ref _playerCodeX, value);
+        }
+
         private Task AddColor(string colorCode)
         {
             PlayerCode += colorCode;
+            PlayerCodeX.Add(CreatePlayerViewModel(colorCode));
             return Task.CompletedTask;
         }
 
         private void ClearLastColor()
         {
             PlayerCode = PlayerCode.Remove(PlayerCode.Length - 1);
+            PlayerCodeX.RemoveAt(PlayerCodeX.Count - 1);
         }
 
         private void SubmitCode()
         {
             // TODO: submit code to game to have it added to the list and checked
         }
+
+        private ColorViewModel CreatePlayerViewModel(string colorCode)
+        {
+            return new ColorViewModel
+            {
+                ColorChar = colorCode,
+                ColorName = ColorConverters.CharToColorNameMap[colorCode],
+                ColorDisplayName = ColorConverters.CharToColorDisplayNameMap[colorCode],
+                Color = ColorConverters.CharToXamlColorMap[colorCode],
+                PegColor = ColorConverters.CharToPegColorMap[colorCode]
+            };
+        }
+
     }
 }

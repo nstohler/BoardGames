@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Mastermind.Game.WpfApp"
+        xmlns:local="clr-namespace:Mastermind.Game.WpfApp" 
+        xmlns:viewmodels="clr-namespace:Mastermind.Game.WpfApp.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MastermindGameViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -22,25 +24,44 @@
             <Label Content="Buttons here (New game/Get hint/...)" />
             <Button Content="Start a new game" Command="{Binding StartNewGameCommand}" />
         </StackPanel>
-        <StackPanel Grid.Row="1" Grid.Column="0">
-            <Label Content="Player area" />
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Colors" />
-                <Button Width="70" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Y" Background="Yellow" />
-                <Button Width="70" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="O" Background="Orange" />
-                <Button Width="70" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="R" Background="Red" />
-                <Button Width="70" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="G" Background="Green" />
-                <Button Width="70" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="L" Background="LightBlue" />
-                <Button Width="70" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="B" Foreground="White" Background="DarkBlue" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="PlayerCode:" />
-                <TextBox Text="{Binding PlayerCode}" d:Text="YOGR" IsReadOnly="true" Width="90" Padding="4"/>
-                <Button Content="⌫" Command="{Binding BackspaceCommand}" Padding="10,0"/>
-                <Button Content="Submit code!" Command="{Binding SubmitCodeCommand}" Padding="10,0"/>
-            </StackPanel>
+        <Border Grid.Row="1" Grid.Column="0" Margin="2"  Padding="0" BorderThickness="2" BorderBrush="LightGray">
+            <StackPanel >
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="Colors" />
+                    <Button Width="70" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Y" Background="Yellow" />
+                    <Button Width="70" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="O" Background="Orange" />
+                    <Button Width="70" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="R" Background="Red" />
+                    <Button Width="70" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="G" Background="Green" />
+                    <Button Width="70" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="L" Background="LightBlue" />
+                    <Button Width="70" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="B" Foreground="White" Background="DarkBlue" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="PlayerCode:" />
+                    <ItemsControl ItemsSource="{Binding PlayerCodeX}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="PlayerCode:" />
+                    <TextBox Text="{Binding PlayerCode}" d:Text="YOGR" IsReadOnly="true" Width="90" Padding="4"/>
+                    <Button Content="⌫" Command="{Binding BackspaceCommand}" Padding="10,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="PlayerCode:" />
+                    <Button Content="Submit code!" Command="{Binding SubmitCodeCommand}" Padding="10,0"/>
+                </StackPanel>
             
-        </StackPanel>
+            </StackPanel>
+        </Border>
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Label Content="{Binding GameId}" d:Content="GameId here" />
         </StackPanel>
