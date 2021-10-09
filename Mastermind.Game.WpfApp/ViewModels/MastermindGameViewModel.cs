@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System.Windows.Input;
 using Microsoft.Toolkit.Mvvm.Input;
+using Mastermind.Game.WpfApp.Helpers;
+using Mastermind.Game.Models;
 
 namespace Mastermind.Game.WpfApp.ViewModels
 {
@@ -18,9 +20,9 @@ namespace Mastermind.Game.WpfApp.ViewModels
         public MastermindGameViewModel()
         {
             StartNewGameCommand = new RelayCommand(StartNewGame);
-            AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => this.PlayerCode.Length < 4);
-            BackspaceCommand = new RelayCommand(ClearLastColor, () => this.PlayerCode.Length > 0);
-            SubmitCodeCommand = new RelayCommand(SubmitCode, () => this.PlayerCode.Length == 4);
+            AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => PlayerCode.Length < 4);
+            BackspaceCommand = new RelayCommand(ClearLastColor, () => PlayerCode.Length > 0);
+            SubmitCodeCommand = new RelayCommand(SubmitCode, () => PlayerCode.Length == 4);
 
             StartNewGame();
         }
@@ -28,7 +30,10 @@ namespace Mastermind.Game.WpfApp.ViewModels
         private void StartNewGame()
         {
             _mastermindGame = App.Current.Services.GetService<IMastermindGame>();
-            
+
+            //var ch = ColorConverters.PegColorToCharMap[PegColor.Green];
+            //var pc = ColorConverters.CharToPegColorMap["Y"];
+            //var x = ColorConverters.CharToXamlColorMap["L"];
 
             // guid check if this works
             GameId = _mastermindGame.GetGameId();
@@ -58,6 +63,7 @@ namespace Mastermind.Game.WpfApp.ViewModels
                 SetProperty(ref _playerCode, value);
                 AddColorCommand.NotifyCanExecuteChanged();
                 BackspaceCommand.NotifyCanExecuteChanged();
+                SubmitCodeCommand.NotifyCanExecuteChanged();
             }
         }
 
