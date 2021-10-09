@@ -39,7 +39,10 @@ namespace Mastermind.Game.WpfApp.ViewModels
             // guid check if this works
             GameId = _mastermindGame.GetGameId();
             PlayerCode = string.Empty;
-            PlayerCodeX = new ObservableCollection<ColorViewModel>();
+            PlayerCodePattern = new ObservableCollection<ColorViewModel>();
+
+            SecretCodePattern = new ObservableCollection<ColorViewModel>(
+                _mastermindGame.GetCodeMakerPattern().PegColors.Select(x => CreateColorViewModel(ColorConverters.PegColorToCharMap[x])));
         }
 
         public RelayCommand StartNewGameCommand { get; }
@@ -69,25 +72,33 @@ namespace Mastermind.Game.WpfApp.ViewModels
             }
         }
 
-        private ObservableCollection<ColorViewModel> _playerCodeX;
+        private ObservableCollection<ColorViewModel> _playerCodePattern;
 
-        public ObservableCollection<ColorViewModel> PlayerCodeX
+        public ObservableCollection<ColorViewModel> PlayerCodePattern
         {
-            get => _playerCodeX;
-            set => SetProperty(ref _playerCodeX, value);
+            get => _playerCodePattern;
+            set => SetProperty(ref _playerCodePattern, value);
+        }
+
+        private ObservableCollection<ColorViewModel> _secretCodePattern;
+
+        public ObservableCollection<ColorViewModel> SecretCodePattern
+        {
+            get => _secretCodePattern;
+            set => SetProperty(ref _secretCodePattern, value);
         }
 
         private Task AddColor(string colorCode)
         {
             PlayerCode += colorCode;
-            PlayerCodeX.Add(CreatePlayerViewModel(colorCode));
+            PlayerCodePattern.Add(CreateColorViewModel(colorCode));
             return Task.CompletedTask;
         }
 
         private void ClearLastColor()
         {
             PlayerCode = PlayerCode.Remove(PlayerCode.Length - 1);
-            PlayerCodeX.RemoveAt(PlayerCodeX.Count - 1);
+            PlayerCodePattern.RemoveAt(PlayerCodePattern.Count - 1);
         }
 
         private void SubmitCode()
@@ -95,7 +106,7 @@ namespace Mastermind.Game.WpfApp.ViewModels
             // TODO: submit code to game to have it added to the list and checked
         }
 
-        private ColorViewModel CreatePlayerViewModel(string colorCode)
+        private ColorViewModel CreateColorViewModel(string colorCode)
         {
             return new ColorViewModel
             {
