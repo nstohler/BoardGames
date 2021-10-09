@@ -48,13 +48,13 @@
         <Border Grid.Row="1" Grid.Column="0" Margin="2"  Padding="0" BorderThickness="2" BorderBrush="LightGray">
             <StackPanel >
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <Label Content="Colors" />
-                    <Button Width="70" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Y" Background="Yellow" Style="{StaticResource ColorSelectionButton}" />
-                    <Button Width="70" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="O" Background="Orange" Style="{StaticResource ColorSelectionButton}"/>
-                    <Button Width="70" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="R" Background="Red" Style="{StaticResource ColorSelectionButton}"/>
-                    <Button Width="70" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="G" Background="Green" Style="{StaticResource ColorSelectionButton}"/>
-                    <Button Width="70" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="L" Background="LightBlue" Style="{StaticResource ColorSelectionButton}"/>
-                    <Button Width="70" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="B" Foreground="White" Background="DarkBlue" Style="{StaticResource ColorSelectionButton}"/>
+                    <Label Content="Colors:" />
+                    <Button Width="65" Margin="2,0" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Y" Background="Yellow" Style="{StaticResource ColorSelectionButton}" />
+                    <Button Width="65" Margin="2,0" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="O" Background="Orange" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="R" Background="Red" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="G" Background="Green" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="L" Background="LightBlue" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="B" Foreground="White" Background="DarkBlue" Style="{StaticResource ColorSelectionButton}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <Label Content="PlayerCode:" />
