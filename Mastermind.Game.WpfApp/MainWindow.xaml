@@ -8,6 +8,27 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:MastermindGameViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="ColorSelectionButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -28,12 +49,12 @@
             <StackPanel >
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <Label Content="Colors" />
-                    <Button Width="70" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Y" Background="Yellow" />
-                    <Button Width="70" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="O" Background="Orange" />
-                    <Button Width="70" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="R" Background="Red" />
-                    <Button Width="70" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="G" Background="Green" />
-                    <Button Width="70" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="L" Background="LightBlue" />
-                    <Button Width="70" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="B" Foreground="White" Background="DarkBlue" />
+                    <Button Width="70" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Y" Background="Yellow" Style="{StaticResource ColorSelectionButton}" />
+                    <Button Width="70" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="O" Background="Orange" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="70" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="R" Background="Red" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="70" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="G" Background="Green" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="70" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="L" Background="LightBlue" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="70" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="B" Foreground="White" Background="DarkBlue" Style="{StaticResource ColorSelectionButton}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <Label Content="PlayerCode:" />
