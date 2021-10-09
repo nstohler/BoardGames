@@ -48,207 +48,98 @@ namespace Mastermind.Game.Tests
         }
 
         [TestMethod]
-        [DataRow(
-            PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.Yellow,
-            PegColor.Orange, PegColor.Orange, PegColor.Orange, PegColor.Orange,
-            0, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.DarkBlue, PegColor.Green,
-            PegColor.Red, PegColor.LightBlue, PegColor.Red, PegColor.LightBlue,
-            0, 0)]
+        [DataRow("YYYY", "OOOO", 0, 0)]
+        [DataRow("YOBG", "RLRL", 0, 0)]
+        [DataRow("LOLO", "GRGR", 0, 0)]
         public void GetCheckResult_returns_correct_result_when_nothing_matches(
-            PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
-            PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
+            string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)
         {
             // Arrange/Act/Assert
             AssertCorrectCheckResultCreated(
-                makerColor1, makerColor2, makerColor3, makerColor4,
-                breakerColor1, breakerColor2, breakerColor3, breakerColor4,
+                makerColorCharString , breakerColorCharString,
                 expectedColorAndPositionExactCount, expectedColorExactCount);
         }
 
         [TestMethod]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            4, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.Yellow,
-            PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.Yellow,
-            4, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            4, 0)]
-        [DataRow(
-            PegColor.Orange, PegColor.Green, PegColor.LightBlue, PegColor.DarkBlue,
-            PegColor.Orange, PegColor.Green, PegColor.LightBlue, PegColor.DarkBlue,
-            4, 0)]
+        [DataRow("YOGR", "YOGR", 4, 0)]
+        [DataRow("YYYY", "YYYY", 4, 0)]
+        [DataRow("GROB", "GROB", 4, 0)]
+        [DataRow("BLOB", "BLOB", 4, 0)]
         public void GetCheckResult_returns_correct_result_when_everything_matches(
-            PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
-            PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
+            string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)
         {
             // Arrange/Act/Assert
             AssertCorrectCheckResultCreated(
-                makerColor1, makerColor2, makerColor3, makerColor4,
-                breakerColor1, breakerColor2, breakerColor3, breakerColor4,
+                makerColorCharString , breakerColorCharString,
                 expectedColorAndPositionExactCount, expectedColorExactCount);
 
         }
 
         [TestMethod]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Yellow, PegColor.LightBlue, PegColor.LightBlue, PegColor.LightBlue,
-            1, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.Orange, PegColor.LightBlue, PegColor.LightBlue,
-            1, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.LightBlue, PegColor.Green, PegColor.LightBlue,
-            1, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.LightBlue, PegColor.LightBlue, PegColor.Red,
-            1, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Yellow, PegColor.LightBlue, PegColor.LightBlue, PegColor.Red,
-            2, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.Orange, PegColor.LightBlue, PegColor.Red,
-            2, 0)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Yellow, PegColor.LightBlue, PegColor.Green, PegColor.Red,
-            3, 0)]
+        [DataRow("YOGR", "YLLL", 1, 0)]
+        [DataRow("YOGR", "LOLL", 1, 0)]
+        [DataRow("YOGR", "LLGL", 1, 0)]
+        [DataRow("YOGR", "LLLR", 1, 0)]
+        [DataRow("YOGR", "YLLR", 2, 0)]
+        [DataRow("YOGR", "LOLR", 2, 0)]
+        [DataRow("YOGR", "YLGR", 3, 0)]
         public void GetCheckResult_returns_correct_result_when_exact_color_and_position_matches(
-            PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
-            PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
+            string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)
         {
             // Arrange/Act/Assert
             AssertCorrectCheckResultCreated(
-                makerColor1, makerColor2, makerColor3, makerColor4,
-                breakerColor1, breakerColor2, breakerColor3, breakerColor4,
+                makerColorCharString , breakerColorCharString,
                 expectedColorAndPositionExactCount, expectedColorExactCount);
         }
 
         [TestMethod]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.Yellow, PegColor.LightBlue, PegColor.LightBlue,
-            0, 1)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.LightBlue, PegColor.Orange, PegColor.LightBlue,
-            0, 1)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.LightBlue, PegColor.LightBlue, PegColor.Green,
-            0, 1)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Red, PegColor.LightBlue, PegColor.LightBlue, PegColor.LightBlue,
-            0, 1)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.LightBlue, PegColor.LightBlue, PegColor.Yellow, PegColor.Orange,
-            0, 2)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Green, PegColor.Red, PegColor.Yellow, PegColor.Orange,
-            0, 4)]
+        [DataRow("YOGR", "LYLL", 0, 1)]
+        [DataRow("YOGR", "LLOL", 0, 1)]
+        [DataRow("YOGR", "LLLG", 0, 1)]
+        [DataRow("YOGR", "RLLL", 0, 1)]
+        [DataRow("YOGR", "LLYO", 0, 2)]
+        [DataRow("YOGR", "GRYO", 0, 4)]
         public void GetCheckResult_returns_correct_result_when_only_color_matches(
-            PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
-            PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
+            string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)
         {
             // Arrange/Act/Assert
             AssertCorrectCheckResultCreated(
-                makerColor1, makerColor2, makerColor3, makerColor4,
-                breakerColor1, breakerColor2, breakerColor3, breakerColor4,
+                makerColorCharString , breakerColorCharString,
                 expectedColorAndPositionExactCount, expectedColorExactCount);
         }
 
         [TestMethod]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Yellow, PegColor.LightBlue, PegColor.LightBlue, PegColor.Orange,
-            1, 1)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Red, PegColor.Orange, PegColor.Green, PegColor.LightBlue,
-            2, 1)]
-        [DataRow(
-            PegColor.Yellow, PegColor.Orange, PegColor.Green, PegColor.Red,
-            PegColor.Red, PegColor.Orange, PegColor.Green, PegColor.Yellow,
-            2, 2)]
+        [DataRow("YOGR", "YLLO", 1, 1)]
+        [DataRow("YOGR", "ROGL", 2, 1)]
+        [DataRow("YOGR", "ROGY", 2, 2)]
         public void GetCheckResult_returns_correct_result_for_mixed_matches(
-            PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
-            PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
+            string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)
         {
             // Arrange/Act/Assert
             AssertCorrectCheckResultCreated(
-                makerColor1, makerColor2, makerColor3, makerColor4,
-                breakerColor1, breakerColor2, breakerColor3, breakerColor4,
+                makerColorCharString , breakerColorCharString,
                 expectedColorAndPositionExactCount, expectedColorExactCount);
         }
 
         [TestMethod]
-        [DataRow(
-            PegColor.DarkBlue, PegColor.Orange, PegColor.Yellow, PegColor.DarkBlue,
-            PegColor.Yellow, PegColor.DarkBlue, PegColor.Orange, PegColor.Orange,
-            0, 3)]
-        [DataRow(
-            PegColor.DarkBlue, PegColor.Orange, PegColor.Yellow, PegColor.DarkBlue,
-            PegColor.Orange, PegColor.DarkBlue, PegColor.Orange, PegColor.Orange,
-            0, 2)]
-        [DataRow(
-            PegColor.DarkBlue, PegColor.DarkBlue, PegColor.Yellow, PegColor.DarkBlue,
-            PegColor.Yellow, PegColor.Yellow, PegColor.Yellow, PegColor.DarkBlue,
-            2, 0)]
-        [DataRow(
-            PegColor.DarkBlue, PegColor.DarkBlue, PegColor.Yellow, PegColor.DarkBlue,
-            PegColor.DarkBlue, PegColor.Yellow, PegColor.DarkBlue, PegColor.DarkBlue,
-            2, 2)]
-        [DataRow(
-            PegColor.Red, PegColor.Red, PegColor.Yellow, PegColor.Red,
-            PegColor.Red, PegColor.Red, PegColor.Red, PegColor.Yellow,
-            2, 2)]
-        [DataRow(
-            PegColor.Red, PegColor.Red, PegColor.Yellow, PegColor.Yellow,
-            PegColor.Red, PegColor.Red, PegColor.Red, PegColor.Red,
-            2, 0)]
-        [DataRow(
-            PegColor.Red, PegColor.Red, PegColor.Yellow, PegColor.Yellow,
-            PegColor.Red, PegColor.Red, PegColor.Red, PegColor.LightBlue,
-            2, 0)]
-        [DataRow(
-            PegColor.Red, PegColor.Red, PegColor.Yellow, PegColor.Yellow,
-            PegColor.Red, PegColor.Red, PegColor.Red, PegColor.LightBlue,
-            2, 0)]
-        [DataRow(
-            PegColor.Red, PegColor.Red, PegColor.Yellow, PegColor.Yellow,
-            PegColor.Yellow, PegColor.Red, PegColor.Yellow, PegColor.Yellow,
-            3, 0)]
-        [DataRow(
-            PegColor.Red, PegColor.Yellow, PegColor.Orange, PegColor.Green,
-            PegColor.Red, PegColor.Red, PegColor.Red, PegColor.Red,
-            1, 0)]
-        [DataRow(
-            PegColor.Red, PegColor.Yellow, PegColor.Orange, PegColor.Red,
-            PegColor.Red, PegColor.Orange, PegColor.Yellow, PegColor.Red,
-            2, 2)]
+        [DataRow("BOYB", "YBOO", 0, 3)]
+        [DataRow("BOYB", "OBOO", 0, 2)]
+        [DataRow("BBYB", "YYYB", 2, 0)]
+        [DataRow("BBYB", "BYBB", 2, 2)]
+        [DataRow("RRYR", "RRRY", 2, 2)]
+        [DataRow("RRYY", "RRRR", 2, 0)]
+        [DataRow("RRYY", "RRRL", 2, 0)]
+        [DataRow("RRYY", "RRRL", 2, 0)]
+        [DataRow("RRYY", "YRYY", 3, 0)]
+        [DataRow("RYOG", "RRRR", 1, 0)]
+        [DataRow("RYOR", "ROYR", 2,2)]
         public void GetCheckResult_returns_correct_for_special_matches(
-            PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
-            PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
+            string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)
         {
             // special cases example:
@@ -258,19 +149,17 @@ namespace Mastermind.Game.Tests
 
             // Arrange/Act/Assert
             AssertCorrectCheckResultCreated(
-                makerColor1, makerColor2, makerColor3, makerColor4,
-                breakerColor1, breakerColor2, breakerColor3, breakerColor4,
+                makerColorCharString , breakerColorCharString,
                 expectedColorAndPositionExactCount, expectedColorExactCount);
         }
 
         private void AssertCorrectCheckResultCreated(
-            PegColor makerColor1, PegColor makerColor2, PegColor makerColor3, PegColor makerColor4,
-            PegColor breakerColor1, PegColor breakerColor2, PegColor breakerColor3, PegColor breakerColor4,
+            string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)
         {
             // Arrange
-            var codeMasterPattern = new CodePattern(makerColor1, makerColor2, makerColor3, makerColor4);
-            var codeBreakerPattern = new CodePattern(breakerColor1, breakerColor2, breakerColor3, breakerColor4);
+            var codeMasterPattern = CodePattern.CreateFromCharString(makerColorCharString );
+            var codeBreakerPattern = CodePattern.CreateFromCharString(breakerColorCharString);
             ICodePatternCheckService service = new CodePatternCheckService();
 
             // Act
