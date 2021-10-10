@@ -34,17 +34,17 @@ namespace Mastermind.Game.Models
 
             foreach (var colorChar in colorCharString)
             {
-                if(!PegColorConverter.ValidChars.Contains(colorChar.ToString()))
+                if(!PegColorConverters.ValidChars.Contains(colorChar.ToString()))
                 {
                     throw new ArgumentException("Invalid color characters found in colorCharString", nameof(colorCharString));
                 }
             }
 
             return new CodePattern(
-                PegColorConverter.CharToPegColorMap[colorCharString[0].ToString()],
-                PegColorConverter.CharToPegColorMap[colorCharString[1].ToString()],
-                PegColorConverter.CharToPegColorMap[colorCharString[2].ToString()],
-                PegColorConverter.CharToPegColorMap[colorCharString[3].ToString()]
+                PegColorConverters.CharToPegColorMap[colorCharString[0].ToString()],
+                PegColorConverters.CharToPegColorMap[colorCharString[1].ToString()],
+                PegColorConverters.CharToPegColorMap[colorCharString[2].ToString()],
+                PegColorConverters.CharToPegColorMap[colorCharString[3].ToString()]
                 );
         }
     }

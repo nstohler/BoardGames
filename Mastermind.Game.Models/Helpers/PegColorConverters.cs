@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mastermind.Game.Models.Helpers
 {
-    public static class PegColorConverter
+    public static class PegColorConverters
     {
         private static readonly ImmutableList<(string ColorChar, string ColorDisplayName, PegColor PegColor)> AllColorMappings =
             new List<(string, string, PegColor)>()
@@ -25,7 +25,7 @@ namespace Mastermind.Game.Models.Helpers
         public static readonly ImmutableDictionary<PegColor, string> PegColorToCharMap;
         public static readonly ImmutableDictionary<string, PegColor> CharToPegColorMap;
 
-        static PegColorConverter()
+        static PegColorConverters()
         {
             ValidChars = AllColorMappings.Select(x => x.ColorChar).ToImmutableList();
 

@@ -1,4 +1,5 @@
 ﻿using Mastermind.Game.Models;
+using Mastermind.Game.Models.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -23,23 +24,19 @@ namespace Mastermind.Game.WpfApp.Helpers
             }
             .ToImmutableList();
 
+        public static readonly ImmutableList<string> ValidChars;
         public static readonly ImmutableDictionary<PegColor, string> PegColorToCharMap;
         public static readonly ImmutableDictionary<string, PegColor> CharToPegColorMap;
+
         public static readonly ImmutableDictionary<string, Color> CharToXamlColorMap;
         public static readonly ImmutableDictionary<string, string> CharToColorNameMap;
         public static readonly ImmutableDictionary<string, string> CharToColorDisplayNameMap;
 
         static ColorConverters()
         {
-            // TODO: use existing colorConverters from Mastermind.Game.Models.Helpers
-
-            PegColorToCharMap = AllColorMappings
-                .Select(x => new { Key = x.PegColor, Value = x.ColorChar })
-                .ToImmutableDictionary(x => x.Key, x => x.Value);
-
-            CharToPegColorMap = AllColorMappings
-                .Select(x => new { Key = x.ColorChar, Value = x.PegColor })
-                .ToImmutableDictionary(x => x.Key, x => x.Value);
+            ValidChars = PegColorConverters.ValidChars;
+            PegColorToCharMap = PegColorConverters.PegColorToCharMap;
+            CharToPegColorMap = PegColorConverters.CharToPegColorMap;
 
             CharToXamlColorMap = AllColorMappings
                 .Select(x => new { Key = x.ColorChar, Value = x.XamlColor })
