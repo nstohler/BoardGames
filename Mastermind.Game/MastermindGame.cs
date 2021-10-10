@@ -68,5 +68,11 @@ namespace Mastermind.Game
             // the game is lost once the player has not attempts left
             return _codeBreakerCombinationsWithResults.Count() >= _maxPlayerAttempts;
         }
+
+        public Hint GetHint()
+        {
+            // TODO: create hint system...
+            throw new NotImplementedException();
+        }
     }
 }

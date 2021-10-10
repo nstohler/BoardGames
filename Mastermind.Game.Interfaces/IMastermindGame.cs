@@ -32,5 +32,7 @@ namespace Mastermind.Game.Interfaces
         /// The game is lost when the code has not been found after 10 attempts
         /// </summary>
         bool IsGameLost();
+
+        Hint GetHint();
     }
 }
