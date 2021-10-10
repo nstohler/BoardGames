@@ -20,21 +20,19 @@ namespace Mastermind.Game.WpfApp.ViewModels
 
         public MastermindGameViewModel()
         {
-            StartNewGameCommand = new RelayCommand(StartNewGame);
-            AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => PlayerCode.Length < 4);
-            BackspaceCommand = new RelayCommand(ClearLastColor, () => PlayerCode.Length > 0);
-            SubmitCodeCommand = new AsyncRelayCommand(SubmitCode, () => PlayerCode.Length == 4);
+            StartNewGameCommand = new RelayCommand(StartNewGame, () => IsGameLost);
+            GiveUpCommand = new RelayCommand(GiveUpGame, () => !IsGameLost);
+            AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => PlayerCode.Length < 4 && !IsGameLost);
+            BackspaceCommand = new RelayCommand(ClearLastColor, () => PlayerCode.Length > 0 && !IsGameLost);
+            SubmitCodeCommand = new AsyncRelayCommand(SubmitCode, () => PlayerCode.Length == 4 && !IsGameLost);
 
             StartNewGame();
         }
 
         private void StartNewGame()
         {
+            IsGameLost = false;
             _mastermindGame = App.Current.Services.GetService<IMastermindGame>();
-
-            //var ch = ColorConverters.PegColorToCharMap[PegColor.Green];
-            //var pc = ColorConverters.CharToPegColorMap["Y"];
-            //var x = ColorConverters.CharToXamlColorMap["L"];
 
             // guid check if this works
             GameId = _mastermindGame.GetGameId();
@@ -46,7 +44,13 @@ namespace Mastermind.Game.WpfApp.ViewModels
                 _mastermindGame.GetCodeMakerPattern().PegColors.Select(x => ColorViewModel.Create(x)));
         }
 
+        private void GiveUpGame()
+        {
+            IsGameLost = true;
+        }
+
         public RelayCommand StartNewGameCommand { get; }
+        public RelayCommand GiveUpCommand { get; }
         public AsyncRelayCommand<string> AddColorCommand { get; set; }
         public RelayCommand BackspaceCommand { get; }
         public AsyncRelayCommand SubmitCodeCommand { get; }
@@ -57,6 +61,22 @@ namespace Mastermind.Game.WpfApp.ViewModels
         {
             get => _gameId;
             set => SetProperty(ref _gameId, value);
+        }
+
+        private bool _isGameLost;
+
+        public bool IsGameLost
+        {
+            get => _isGameLost;
+            set
+            {
+                SetProperty(ref _isGameLost, value);
+                StartNewGameCommand.NotifyCanExecuteChanged();
+                GiveUpCommand.NotifyCanExecuteChanged();
+                AddColorCommand.NotifyCanExecuteChanged();
+                BackspaceCommand.NotifyCanExecuteChanged();
+                SubmitCodeCommand.NotifyCanExecuteChanged();
+            }
         }
 
         private string _playerCode;
@@ -134,6 +154,15 @@ namespace Mastermind.Game.WpfApp.ViewModels
                     "Ultimate success");
 
                 StartNewGame();
+            }
+
+            // ckeck if lost
+            if(_mastermindGame.IsGameLost())
+            {
+                // show solution
+                IsGameLost = true;
+
+                // disable all player inputs, except start new game
             }
         }
     }

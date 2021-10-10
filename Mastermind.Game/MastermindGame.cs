@@ -15,6 +15,7 @@ namespace Mastermind.Game
 
         private readonly CodePattern _codeMakerCombination;
         private readonly List<CodePatternWithResult> _codeBreakerCombinationsWithResults;
+        private readonly int _maxPlayerAttempts = 10;
         private readonly Guid _gameId = Guid.NewGuid();
 
         public int GetCodeBreakerCombinationCount => _codeBreakerCombinationsWithResults.Count;
@@ -50,11 +51,6 @@ namespace Mastermind.Game
             return Task.FromResult(_codePatternCheckService.AreMatchingCodePatterns(_codeMakerCombination, new CodePattern(color1, color2, color3, color4)));
         }
 
-        public void StartNewGame()
-        {
-            throw new NotImplementedException();
-        }
-
         public CodePattern GetCodeMakerPattern()
         {
             // only use after losing the game!
@@ -64,6 +60,12 @@ namespace Mastermind.Game
         public string GetGameId()
         {
             return _gameId.ToString();
+        }
+
+        public bool IsGameLost()
+        {
+            // the game is lost once the player has not attempts left
+            return _codeBreakerCombinationsWithResults.Count() >= _maxPlayerAttempts;
         }
     }
 }
