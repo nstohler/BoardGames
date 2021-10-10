@@ -31,6 +31,8 @@ namespace Mastermind.Game.WpfApp.Helpers
 
         static ColorConverters()
         {
+            // TODO: use existing colorConverters from Mastermind.Game.Models.Helpers
+
             PegColorToCharMap = AllColorMappings
                 .Select(x => new { Key = x.PegColor, Value = x.ColorChar })
                 .ToImmutableDictionary(x => x.Key, x => x.Value);

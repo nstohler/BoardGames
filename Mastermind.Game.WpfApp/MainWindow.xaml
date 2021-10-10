@@ -55,6 +55,17 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
+            <ItemsControl ItemsSource="{Binding PlayerCodePattern}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
         <StackPanel Grid.Row="0" Grid.Column="1">
             <Label Content="Buttons here (New game/Get hint/...)" />

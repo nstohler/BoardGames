@@ -23,7 +23,7 @@ namespace Mastermind.Game.WpfApp.ViewModels
             StartNewGameCommand = new RelayCommand(StartNewGame);
             AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => PlayerCode.Length < 4);
             BackspaceCommand = new RelayCommand(ClearLastColor, () => PlayerCode.Length > 0);
-            SubmitCodeCommand = new RelayCommand(SubmitCode, () => PlayerCode.Length == 4);
+            SubmitCodeCommand = new AsyncRelayCommand(SubmitCode, () => PlayerCode.Length == 4);
 
             StartNewGame();
         }
@@ -40,15 +40,16 @@ namespace Mastermind.Game.WpfApp.ViewModels
             GameId = _mastermindGame.GetGameId();
             PlayerCode = string.Empty;
             PlayerCodePattern = new ObservableCollection<ColorViewModel>();
+            SubmittedCodePatternsWithResults = new ObservableCollection<CodePatternWithResultViewModel>();
 
             SecretCodePattern = new ObservableCollection<ColorViewModel>(
-                _mastermindGame.GetCodeMakerPattern().PegColors.Select(x => CreateColorViewModel(ColorConverters.PegColorToCharMap[x])));
+                _mastermindGame.GetCodeMakerPattern().PegColors.Select(x => ColorViewModel.Create(x)));
         }
 
         public RelayCommand StartNewGameCommand { get; }
         public AsyncRelayCommand<string> AddColorCommand { get; set; }
         public RelayCommand BackspaceCommand { get; }
-        public RelayCommand SubmitCodeCommand { get; }
+        public AsyncRelayCommand SubmitCodeCommand { get; }
 
         private string _gameId;
 
@@ -88,10 +89,18 @@ namespace Mastermind.Game.WpfApp.ViewModels
             set => SetProperty(ref _secretCodePattern, value);
         }
 
+        private ObservableCollection<CodePatternWithResultViewModel> _submittedCodePatternsWithResults;
+
+        public ObservableCollection<CodePatternWithResultViewModel> SubmittedCodePatternsWithResults
+        {
+            get => _submittedCodePatternsWithResults;
+            set => SetProperty(ref _submittedCodePatternsWithResults, value);
+        }
+
         private Task AddColor(string colorCode)
         {
             PlayerCode += colorCode;
-            PlayerCodePattern.Add(CreateColorViewModel(colorCode));
+            PlayerCodePattern.Add(ColorViewModel.Create(colorCode));
             return Task.CompletedTask;
         }
 
@@ -101,22 +110,31 @@ namespace Mastermind.Game.WpfApp.ViewModels
             PlayerCodePattern.RemoveAt(PlayerCodePattern.Count - 1);
         }
 
-        private void SubmitCode()
+        private async Task SubmitCode()
         {
             // TODO: submit code to game to have it added to the list and checked
+            // - use game to check PlayerCodePattern
+            // - add PlayerCodePattern to SubmittedCodePatternsWithResults
+            var codePatternWithResult = await _mastermindGame.SubmitAndCheckCodeBreakerCodePatternAsync(
+                PlayerCodePattern[0].PegColor, PlayerCodePattern[1].PegColor,
+                PlayerCodePattern[2].PegColor, PlayerCodePattern[3].PegColor);
+
+            var codePatternWithResultViewModel = CodePatternWithResultViewModel.Create(SubmittedCodePatternsWithResults.Count + 1, codePatternWithResult);
+
+            SubmittedCodePatternsWithResults.Add(codePatternWithResultViewModel);
         }
 
-        private ColorViewModel CreateColorViewModel(string colorCode)
-        {
-            return new ColorViewModel
-            {
-                ColorChar = colorCode,
-                ColorName = ColorConverters.CharToColorNameMap[colorCode],
-                ColorDisplayName = ColorConverters.CharToColorDisplayNameMap[colorCode],
-                Color = ColorConverters.CharToXamlColorMap[colorCode],
-                PegColor = ColorConverters.CharToPegColorMap[colorCode]
-            };
-        }
+        //private ColorViewModel CreateColorViewModel(string colorCode)
+        //{
+        //    return new ColorViewModel
+        //    {
+        //        ColorChar = colorCode,
+        //        ColorName = ColorConverters.CharToColorNameMap[colorCode],
+        //        ColorDisplayName = ColorConverters.CharToColorDisplayNameMap[colorCode],
+        //        Color = ColorConverters.CharToXamlColorMap[colorCode],
+        //        PegColor = ColorConverters.CharToPegColorMap[colorCode]
+        //    };
+        //}
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Mastermind.Game.Models;
+using Mastermind.Game.WpfApp.Helpers;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,23 @@ namespace Mastermind.Game.WpfApp.ViewModels
         {
             get => _pegColor;
             set => SetProperty(ref _pegColor, value);
+        }
+
+        internal static ColorViewModel Create(PegColor pegColor)
+        {
+            return Create(ColorConverters.PegColorToCharMap[pegColor]);
+        }
+
+        public static ColorViewModel Create(string colorChar)
+        {
+            return new ColorViewModel
+            {
+                ColorChar = colorChar,
+                ColorName = ColorConverters.CharToColorNameMap[colorChar],
+                ColorDisplayName = ColorConverters.CharToColorDisplayNameMap[colorChar],
+                Color = ColorConverters.CharToXamlColorMap[colorChar],
+                PegColor = ColorConverters.CharToPegColorMap[colorChar]
+            };
         }
     }
 }
