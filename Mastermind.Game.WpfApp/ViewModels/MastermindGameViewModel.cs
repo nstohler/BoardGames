@@ -112,9 +112,6 @@ namespace Mastermind.Game.WpfApp.ViewModels
 
         private async Task SubmitCode()
         {
-            // TODO: submit code to game to have it added to the list and checked
-            // - use game to check PlayerCodePattern
-            // - add PlayerCodePattern to SubmittedCodePatternsWithResults
             var codePatternWithResult = await _mastermindGame.SubmitAndCheckCodeBreakerCodePatternAsync(
                 PlayerCodePattern[0].PegColor, PlayerCodePattern[1].PegColor,
                 PlayerCodePattern[2].PegColor, PlayerCodePattern[3].PegColor);
@@ -126,6 +123,18 @@ namespace Mastermind.Game.WpfApp.ViewModels
             // clear pattern for new entry
             PlayerCodePattern.Clear();
             PlayerCode = string.Empty;
+
+            // check if won
+            if(codePatternWithResult.Result.IsGameWon)
+            {
+                System.Windows.MessageBox.Show(
+                    "Congratulations!" + Environment.NewLine +
+                    "You win" + Environment.NewLine +
+                    "🎉🎊🎈🎊🎉", 
+                    "Ultimate success");
+
+                StartNewGame();
+            }
         }
     }
 }
