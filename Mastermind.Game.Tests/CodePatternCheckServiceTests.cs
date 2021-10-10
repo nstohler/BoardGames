@@ -137,7 +137,7 @@ namespace Mastermind.Game.Tests
         [DataRow("RRYY", "RRRL", 2, 0)]
         [DataRow("RRYY", "YRYY", 3, 0)]
         [DataRow("RYOG", "RRRR", 1, 0)]
-        [DataRow("RYOR", "ROYR", 2,2)]
+        [DataRow("RYOR", "ROYR", 2, 2)]
         public void GetCheckResult_returns_correct_for_special_matches(
             string makerColorCharString , string breakerColorCharString,
             int expectedColorAndPositionExactCount, int expectedColorExactCount)

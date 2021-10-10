@@ -6,6 +6,8 @@ namespace Mastermind.Game.Interfaces
 {
     public interface IMastermindGame
     {
+        int MaxPlayerAttempts { get; }
+
         /// <summary>
         /// Checks the provided colors against the secret code and returns the result. 
         /// Stores the pattern and the result internally.

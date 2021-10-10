@@ -18,6 +18,7 @@ namespace Mastermind.Game
         private readonly int _maxPlayerAttempts = 10;
         private readonly Guid _gameId = Guid.NewGuid();
 
+        public int MaxPlayerAttempts => _maxPlayerAttempts;
         public int GetCodeBreakerCombinationCount => _codeBreakerCombinationsWithResults.Count;
 
         public MastermindGame(IRandomPegColorService randomPegColorService, ICodePatternCheckService codePatternCheckService)
