@@ -20,18 +20,18 @@ namespace Mastermind.Game.WpfApp.ViewModels
 
         public MastermindGameViewModel()
         {
-            StartNewGameCommand = new RelayCommand(StartNewGame, () => IsGameLost);
-            GiveUpCommand = new RelayCommand(GiveUpGame, () => !IsGameLost);
-            AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => PlayerCode.Length < 4 && !IsGameLost);
-            BackspaceCommand = new RelayCommand(ClearLastColor, () => PlayerCode.Length > 0 && !IsGameLost);
-            SubmitCodeCommand = new AsyncRelayCommand(SubmitCode, () => PlayerCode.Length == 4 && !IsGameLost);
+            StartNewGameCommand = new RelayCommand(StartNewGame, () => ShowSecretCode);
+            GiveUpCommand = new RelayCommand(GiveUpGame, () => !ShowSecretCode);
+            AddColorCommand = new AsyncRelayCommand<string>(AddColor, x => PlayerCode.Length < 4 && !ShowSecretCode);
+            BackspaceCommand = new RelayCommand(ClearLastColor, () => PlayerCode.Length > 0 && !ShowSecretCode);
+            SubmitCodeCommand = new AsyncRelayCommand(SubmitCode, () => PlayerCode.Length == 4 && !ShowSecretCode);
 
             StartNewGame();
         }
 
         private void StartNewGame()
         {
-            IsGameLost = false;
+            ShowSecretCode = false;
             _mastermindGame = App.Current.Services.GetService<IMastermindGame>();
 
             // guid check if this works
@@ -46,7 +46,7 @@ namespace Mastermind.Game.WpfApp.ViewModels
 
         private void GiveUpGame()
         {
-            IsGameLost = true;
+            ShowSecretCode = true;
         }
 
         public RelayCommand StartNewGameCommand { get; }
@@ -63,14 +63,14 @@ namespace Mastermind.Game.WpfApp.ViewModels
             set => SetProperty(ref _gameId, value);
         }
 
-        private bool _isGameLost;
+        private bool _showSecretCode;
 
-        public bool IsGameLost
+        public bool ShowSecretCode
         {
-            get => _isGameLost;
+            get => _showSecretCode;
             set
             {
-                SetProperty(ref _isGameLost, value);
+                SetProperty(ref _showSecretCode, value);
                 StartNewGameCommand.NotifyCanExecuteChanged();
                 GiveUpCommand.NotifyCanExecuteChanged();
                 AddColorCommand.NotifyCanExecuteChanged();
@@ -147,20 +147,21 @@ namespace Mastermind.Game.WpfApp.ViewModels
             // check if won
             if(codePatternWithResult.Result.IsGameWon)
             {
+                // show solution
+                ShowSecretCode = true;
+
                 System.Windows.MessageBox.Show(
                     "Congratulations!" + Environment.NewLine +
                     "You win" + Environment.NewLine +
                     "🎉🎊🎈🎊🎉", 
                     "Ultimate success");
-
-                StartNewGame();
             }
 
             // ckeck if lost
             if(_mastermindGame.IsGameLost())
             {
                 // show solution
-                IsGameLost = true;
+                ShowSecretCode = true;
 
                 // disable all player inputs, except start new game
             }
