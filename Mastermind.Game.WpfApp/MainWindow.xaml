@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:Mastermind.Game.WpfApp.ViewModels" 
         d:DataContext="{d:DesignInstance Type=viewmodels:MastermindGameViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Window.Resources>
         <Style x:Key="ColorSelectionButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -55,14 +55,32 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <ItemsControl ItemsSource="{Binding PlayerCodePattern}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
+            <ItemsControl ItemsSource="{Binding SubmittedCodePatternsWithResults}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Number}" Width="30" HorizontalContentAlignment="Right"/>
+                            <ItemsControl ItemsSource="{Binding CodePattern}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Border BorderBrush="Gray" BorderThickness="2" Background="Black">
+                                <Label Content="{Binding Result.ColorAndPositionExactCount}" Foreground="White" FontWeight="Bold" Width="20" HorizontalContentAlignment="Center"/>
+                            </Border>
+                            <Border BorderBrush="Gray" BorderThickness="2">
+                                <Label Content="{Binding Result.ColorExactCount}" Width="20" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+                            </Border>
+                            
+                            <Label Content="{Binding Result.IsGameWon}" Width="60"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

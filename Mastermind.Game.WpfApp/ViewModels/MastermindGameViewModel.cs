@@ -122,19 +122,10 @@ namespace Mastermind.Game.WpfApp.ViewModels
             var codePatternWithResultViewModel = CodePatternWithResultViewModel.Create(SubmittedCodePatternsWithResults.Count + 1, codePatternWithResult);
 
             SubmittedCodePatternsWithResults.Add(codePatternWithResultViewModel);
+
+            // clear pattern for new entry
+            PlayerCodePattern.Clear();
+            PlayerCode = string.Empty;
         }
-
-        //private ColorViewModel CreateColorViewModel(string colorCode)
-        //{
-        //    return new ColorViewModel
-        //    {
-        //        ColorChar = colorCode,
-        //        ColorName = ColorConverters.CharToColorNameMap[colorCode],
-        //        ColorDisplayName = ColorConverters.CharToColorDisplayNameMap[colorCode],
-        //        Color = ColorConverters.CharToXamlColorMap[colorCode],
-        //        PegColor = ColorConverters.CharToPegColorMap[colorCode]
-        //    };
-        //}
-
     }
 }
