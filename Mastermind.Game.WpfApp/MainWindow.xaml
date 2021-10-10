@@ -38,56 +38,57 @@
             <ColumnDefinition Width="60*"/>
             <ColumnDefinition Width="40*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="0">
-            <Label Content="Playfield" />
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Content="SecretCode:" />
-                <ItemsControl ItemsSource="{Binding SecretCodePattern}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
+        <Border Grid.Row="0" Grid.Column="0" Margin="2"  Padding="0" BorderThickness="2" BorderBrush="LightGray">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="SecretCode:" />
+                    <ItemsControl ItemsSource="{Binding SecretCodePattern}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+                <ItemsControl ItemsSource="{Binding SubmittedCodePatternsWithResults}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Number}" Width="30" HorizontalContentAlignment="Right"/>
+                                <ItemsControl ItemsSource="{Binding CodePattern}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center" Height="30"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Border BorderBrush="Gray" BorderThickness="1" Background="Black" Padding="1" Height="30" Margin="3,0">
+                                    <Label Content="{Binding Result.ColorAndPositionExactCount}" Foreground="White" FontWeight="Bold" Width="20" HorizontalContentAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="Gray" BorderThickness="1" Padding="1" Height="30" Margin="3,0">
+                                    <Label Content="{Binding Result.ColorExactCount}" Width="20" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+                                </Border>
+
+                                <Label Content="{Binding Result.IsGameWon}" Width="60"/>
+                            </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
-            <ItemsControl ItemsSource="{Binding SubmittedCodePatternsWithResults}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="{Binding Number}" Width="30" HorizontalContentAlignment="Right"/>
-                            <ItemsControl ItemsSource="{Binding CodePattern}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <Border BorderBrush="Gray" BorderThickness="2" Background="Black">
-                                <Label Content="{Binding Result.ColorAndPositionExactCount}" Foreground="White" FontWeight="Bold" Width="20" HorizontalContentAlignment="Center"/>
-                            </Border>
-                            <Border BorderBrush="Gray" BorderThickness="2">
-                                <Label Content="{Binding Result.ColorExactCount}" Width="20" FontWeight="Bold" HorizontalContentAlignment="Center"/>
-                            </Border>
-                            
-                            <Label Content="{Binding Result.IsGameWon}" Width="60"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+        </Border>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Label Content="Buttons here (New game/Get hint/...)" />
             <Button Content="Start a new game" Command="{Binding StartNewGameCommand}" />
+            <Button Content="Get a hint" IsEnabled="false" />
         </StackPanel>
         <Border Grid.Row="1" Grid.Column="0" Margin="2"  Padding="0" BorderThickness="2" BorderBrush="LightGray">
             <StackPanel >
