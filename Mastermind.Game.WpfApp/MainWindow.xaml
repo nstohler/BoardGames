@@ -1,0 +1,137 @@
+﻿<Window x:Class="Mastermind.Game.WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mastermind.Game.WpfApp" 
+        xmlns:viewmodels="clr-namespace:Mastermind.Game.WpfApp.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodels:MastermindGameViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+        <Style x:Key="ColorSelectionButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="40*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="0" Margin="2"  Padding="0" BorderThickness="2" BorderBrush="LightGray">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5" Visibility="{Binding ShowSecretCode, Converter={StaticResource VisibleIfTrueConverter}}">
+                    <Label Content="SecretCode:" />
+                    <ItemsControl ItemsSource="{Binding SecretCodePattern}">
+                        <ItemsControl.ItemsPanel>   
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+                <ItemsControl ItemsSource="{Binding SubmittedCodePatternsWithResults}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Number}" Width="30" HorizontalContentAlignment="Right"/>
+                                <ItemsControl ItemsSource="{Binding CodePattern}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center" Height="30"/>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Border BorderBrush="Gray" BorderThickness="1" Background="Black" Padding="1" Height="30" Margin="3,0">
+                                    <Label Content="{Binding Result.ColorAndPositionExactCount}" Foreground="White" FontWeight="Bold" Width="20" HorizontalContentAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="Gray" BorderThickness="1" Padding="1" Height="30" Margin="3,0">
+                                    <Label Content="{Binding Result.ColorExactCount}" Width="20" FontWeight="Bold" HorizontalContentAlignment="Center"/>
+                                </Border>
+
+                                <Label Content="{Binding Result.IsGameWon}" Width="60"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Button Content="Start a new game" Command="{Binding StartNewGameCommand}" />
+            <Button Content="Get a hint" IsEnabled="false" />
+        </StackPanel>
+        <Border Grid.Row="1" Grid.Column="0" Margin="2"  Padding="0" BorderThickness="2" BorderBrush="LightGray">
+            <StackPanel >
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="Colors:" />
+                    <Button Width="65" Margin="2,0" Content="Yellow" Command="{Binding AddColorCommand}" CommandParameter="Y" Background="Yellow" Style="{StaticResource ColorSelectionButton}" />
+                    <Button Width="65" Margin="2,0" Content="Orange" Command="{Binding AddColorCommand}" CommandParameter="O" Background="Orange" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Red" Command="{Binding AddColorCommand}" CommandParameter="R" Background="Red" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Green" Command="{Binding AddColorCommand}" CommandParameter="G" Background="Green" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Light Blue" Command="{Binding AddColorCommand}" CommandParameter="L" Background="LightBlue" Style="{StaticResource ColorSelectionButton}"/>
+                    <Button Width="65" Margin="2,0" Content="Dark Blue" Command="{Binding AddColorCommand}" CommandParameter="B" Foreground="White" Background="DarkBlue" Style="{StaticResource ColorSelectionButton}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="PlayerCode:" />
+                    <ItemsControl ItemsSource="{Binding PlayerCodePattern}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding ColorDisplayName}" Background="{Binding ColorName}" Width="80" HorizontalContentAlignment="Center"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="PlayerCode:" />
+                    <TextBox Text="{Binding PlayerCode}" d:Text="YOGR" IsReadOnly="true" Width="90" Padding="4"/>
+                    <Button Content="⌫" Command="{Binding BackspaceCommand}" Padding="10,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Label Content="PlayerCode:" />
+                    <Button Content="Submit code!" Command="{Binding SubmitCodeCommand}" Padding="10,0"/>
+                </StackPanel>
+            
+            </StackPanel>
+        </Border>
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Label Content="{Binding GameId}" d:Content="GameId here" />
+            <Button Content="Give up 😢!" Command="{Binding GiveUpCommand}" Padding="10,0" Width="100"/>
+        </StackPanel>
+    </Grid>
+</Window>
